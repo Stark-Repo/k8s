@@ -24,7 +24,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script{
-                    withDockerRegistry(CredentialsId: 'docker-token') {
+                    withDockerRegistry(credentialsId: 'docker-token') {
                     sh "sudo docker push starkdocker475/app_deploy:v2.0"
             }
             }
