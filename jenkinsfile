@@ -6,7 +6,6 @@ pipeline {
     environment {
         DOCKER_REGISTRY = "starkdocker475"
         IMAGE_NAME = "my-app"
-        KUBECONFIG = credentials('kubeconfig')  // Use K8s credentials from Jenkins
     }
 
     stages {
