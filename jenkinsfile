@@ -17,18 +17,15 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                    sh "docker build -t my-app:v2.0 ." 
+                    sh "docker build -t starkdocker475/app_deploy ." 
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    docker.withRegistry('', credentialsId: 'docker-token') {
-                        dockerImage.push()
-                        dockerImage.push('v2.0')  // Tag it as 'latest'
-                    }
-                }
+                sh "sudo docker login -u starkdocker475"
+                sh "credentialsId: 'docker-token'"
+                sh "sudo docker push starkdocker475/app_deploy:my-app/V2.0"
             }
         }
    }
