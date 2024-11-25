@@ -27,32 +27,13 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker_hub credentials') {
+                    docker.withRegistry('', 'docker_hub credentials') {
                         dockerImage.push()
                         dockerImage.push('latest')  // Tag it as 'latest'
                     }
                 }
             }
         }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh '''
-                kubectl apply -f k8s/deployment.yaml
-                kubectl rollout status deployment my-app
-                '''
-            }
-        }
-
-        stage('Post-deployment Tests') {
-            steps {
-                sh '''
-                kubectl get pods -n default
-                curl http://my-app-service:80/health
-                '''
-            }
-        }
-    }
 
     post {
         success {
@@ -62,4 +43,5 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
+}
 }
