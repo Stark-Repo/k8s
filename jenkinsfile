@@ -17,7 +17,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                    sh "docker build -t starkdocker475/app_deploy:my-app/V2.0 ." 
+                    sh "docker build -t starkdocker475/app_deploy ." 
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
                     withDockerRegistry(CredentialsId: 'docker-token') {
                     sh "sudo docker login -u starkdocker475"
                     sh "credentialsId: 'docker-token'"
-                    sh "sudo docker push starkdocker475/app_deploy:my-app/V2.0"
+                    sh "sudo docker push starkdocker475/app_deploy:v2.0"
             }
             }
         }
