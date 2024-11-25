@@ -10,9 +10,9 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repository') {
+       stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Stark-Repo/k8s.git'
+                git branch: 'main', credentialsId: 'git-token', url: 'https://github.com/Stark-Repo/k8s.git'
             }
         }
 
